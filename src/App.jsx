@@ -118,4 +118,81 @@ export default function App() {
 
   const irWhatsApp = () => {
     const mensajes = {
-      ve
+      verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE.",
+      amarillo: "Hola, terminé el diagnóstico y salí PERFIL AMARILLO.",
+      rojo: "Hola, terminé el diagnóstico y salí PERFIL ROJO.",
+    };
+
+    const msg = encodeURIComponent(mensajes[color]);
+    window.location.href = `https://wa.me/5218119113114?text=${msg}`;
+  };
+
+  if (showLead) {
+    return (
+      <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
+        <h2>Recibe tu resultado</h2>
+
+        <input
+          placeholder="Nombre"
+          value={nombre}
+          onChange={e => setNombre(e.target.value)}
+        />
+
+        <input
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+
+        <button
+          disabled={sending}
+          onClick={() => {
+            if (!nombre || !email) {
+              alert("Completa nombre y email");
+              return;
+            }
+            setSending(true);
+            enviarAGoogleSheets();
+            setShowLead(false);
+            setStep(questions.length);
+          }}
+        >
+          Ver resultado
+        </button>
+      </div>
+    );
+  }
+
+  if (step === questions.length) {
+    return (
+      <div style={{ padding: 40, textAlign: "center" }}>
+        <h1>Resultado</h1>
+        <h2>{getLabel(score)}</h2>
+        <p>Puntaje: {score}/26</p>
+        <button onClick={irWhatsApp}>Continuar por WhatsApp</button>
+      </div>
+    );
+  }
+
+  const q = questions[step];
+
+  return (
+    <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
+      <h2>{q.question}</h2>
+
+      {q.options.map(o => (
+        <button
+          key={o.label}
+          onClick={() => {
+            setScore(score + o.score);
+            setStep(step + 1);
+          }}
+        >
+          {o.label}
+        </button>
+      ))}
+
+      <p>Progreso {step + 1}/8</p>
+    </div>
+  );
+}
