@@ -132,9 +132,7 @@ useEffect(() => {
 `;
   };
 
-if (step === questions.length && !showLead) {
-  setShowLead(true);
-}
+
 
   if (showLead) {
     return (
