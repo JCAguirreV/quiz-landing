@@ -168,7 +168,7 @@ if (!nombre || !email) {
 
           style={{ width: "100%", padding: 14 }}
         >
-          MI Resultado
+          Mi score
         </button>
       </div>
     );
