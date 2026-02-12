@@ -160,7 +160,7 @@ useEffect(() => {
           }}
           style={{ width: "100%", padding: 14 }}
         >
-          Ver resultado
+          Mi resultado
         </button>
       </div>
     );
