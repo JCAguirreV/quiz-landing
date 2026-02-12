@@ -6,8 +6,8 @@ const questions = [
     options: [
       { label: "Trabajo muchas horas y poco tiempo familia", score: 3 },
       { label: "Necesito ingresos sin más estrés", score: 3 },
-      { label: "Quiero algo propio", score: 2 },
-      { label: "Solo explorando", score: 0 },
+      { label: "Quiero construir algo propio", score: 2 },
+      { label: "Solo estoy explorando", score: 0 },
     ],
   },
   {
@@ -20,9 +20,9 @@ const questions = [
   {
     question: "¿Cómo te sientes recomendando productos?",
     options: [
-      { label: "Incómoda", score: 1 },
-      { label: "No hábil", score: 1 },
-      { label: "Temor rechazo", score: 1 },
+      { label: "Me incomoda insistir", score: 1 },
+      { label: "No me siento muy hábil", score: 1 },
+      { label: "Me preocupa el rechazo", score: 1 },
       { label: "Cómoda si me gusta", score: 3 },
     ],
   },
@@ -31,24 +31,24 @@ const questions = [
     options: [
       { label: "Muy importante", score: 3 },
       { label: "Importante", score: 2 },
-      { label: "Poco", score: 1 },
+      { label: "Poco importante", score: 1 },
       { label: "No lo pensé", score: 0 },
     ],
   },
   {
     question: "¿Has emprendido antes?",
     options: [
-      { label: "Sí y bien", score: 3 },
-      { label: "Sí pero sola", score: 2 },
-      { label: "Sí no era", score: 1 },
-      { label: "Primera vez", score: 2 },
+      { label: "Sí y me fue bien", score: 3 },
+      { label: "Sí, pero me sentí sola", score: 2 },
+      { label: "Sí, no era para mi", score: 1 },
+      { label: "No, Primera vez", score: 2 },
     ],
   },
   {
     question: "¿Cuándo quieres ingresos extra?",
     options: [
-      { label: "Ya", score: 4 },
-      { label: "3 meses", score: 3 },
+      { label: "Lo más pronto posible", score: 4 },
+      { label: "En 3 meses", score: 3 },
       { label: "Este año", score: 1 },
       { label: "Solo viendo", score: 0 },
     ],
@@ -56,9 +56,9 @@ const questions = [
   {
     question: "Tiempo semanal disponible",
     options: [
-      { label: "5–7h", score: 4 },
-      { label: "3–5h", score: 3 },
-      { label: "1–2h", score: 1 },
+      { label: "5–7 horas", score: 4 },
+      { label: "3–5 horas", score: 3 },
+      { label: "1–2 horas", score: 1 },
       { label: "Casi nada", score: 0 },
     ],
   },
@@ -73,7 +73,13 @@ const questions = [
   },
 ];
 
-function result(score) {
+function getColor(score) {
+  if (score >= 18) return "verde";
+  if (score >= 11) return "amarillo";
+  return "rojo";
+}
+
+function getLabel(score) {
   if (score >= 18) return "🟢 LISTA";
   if (score >= 11) return "🟡 TIBIA";
   return "🔴 CURIOSA";
@@ -83,12 +89,91 @@ export default function App() {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
 
+  const [showLead, setShowLead] = useState(false);
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+
+  const color = getColor(score);
+
+  const enviarAGoogleSheets = () => {
+  const data = new URLSearchParams({
+    "entry.704480388": nombre,
+    "entry.1731384513": email,
+    "entry.1032380844": score.toString(),
+    "entry.2114003621": color
+  });
+
+  fetch(
+    "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse",
+    {
+      method: "POST",
+      mode: "no-cors",
+      body: data,
+    }
+  );
+};
+
+
+  const irWhatsApp = () => {
+    const mensajes = {
+      verde:
+        "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.",
+      amarillo:
+        "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.",
+      rojo:
+        "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.",
+    };
+
+    const msg = encodeURIComponent(mensajes[color]);
+    window.location.href = `https://wa.me/TUNUMERO?text=${msg}`;
+  };
+
+  if (step === questions.length && !showLead) {
+    setShowLead(true);
+  }
+
+  if (showLead) {
+    return (
+      <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
+        <h2>Recibe tu resultado</h2>
+
+        <input
+          placeholder="Nombre"
+          value={nombre}
+          onChange={e => setNombre(e.target.value)}
+          style={{ width: "100%", padding: 12, marginBottom: 10 }}
+        />
+
+        <input
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          style={{ width: "100%", padding: 12, marginBottom: 10 }}
+        />
+
+        <button
+          onClick={() => {
+            enviarAGoogleSheets();
+            setShowLead(false);
+          }}
+          style={{ width: "100%", padding: 14 }}
+        >
+          Ver resultado
+        </button>
+      </div>
+    );
+  }
+
   if (step === questions.length) {
     return (
-      <div style={{ padding: 40, fontFamily: "sans-serif", textAlign: "center" }}>
+      <div style={{ padding: 40, textAlign: "center" }}>
         <h1>Resultado</h1>
-        <h2>{result(score)}</h2>
+        <h2>{getLabel(score)}</h2>
         <p>Puntaje: {score}/26</p>
+
+        <button onClick={irWhatsApp} style={{ padding: 16 }}>
+          Continuar por WhatsApp
+        </button>
       </div>
     );
   }
@@ -96,7 +181,7 @@ export default function App() {
   const q = questions[step];
 
   return (
-    <div style={{ padding: 40, maxWidth: 600, margin: "auto", fontFamily: "sans-serif" }}>
+    <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
       <h2>{q.question}</h2>
 
       {q.options.map(o => (
@@ -111,8 +196,6 @@ export default function App() {
             width: "100%",
             margin: "10px 0",
             padding: 14,
-            fontSize: 16,
-            cursor: "pointer"
           }}
         >
           {o.label}
