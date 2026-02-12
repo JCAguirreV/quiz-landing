@@ -88,29 +88,26 @@ function getLabel(score) {
 export default function App() {
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
-
   const [showLead, setShowLead] = useState(false);
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
 
   const color = getColor(score);
 
-useEffect(() => {
-  if (step === questions.length) {
-    setShowLead(true);
-  }
-}, [step]);
-  const [sending, setSending] = useState(false);
-  setSending(true);
-  enviarAGoogleSheets();
+  useEffect(() => {
+    if (step === questions.length) {
+      setShowLead(true);
+    }
+  }, [step]);
 
   const enviarAGoogleSheets = () => {
-const data = new URLSearchParams({
-  "entry.123456789": nombre,
-  "entry.987654321": email,
-  "entry.555555555": score,
-  "entry.444444444": color,
-});
+    const data = new URLSearchParams({
+      "entry.704480388": nombre, 
+      "entry.1731384513": email, 
+      "entry.1032380844": score.toString(), 
+      "entry.2114003621": color,
+    });
 
     fetch("PEGAR_AQUI_URL_FORM", {
       method: "POST",
@@ -119,100 +116,6 @@ const data = new URLSearchParams({
     });
   };
 
-const irWhatsApp = () => {
-  const mensajes = {
-    verde:
-      "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.",
-    amarillo:
-      "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.",
-    rojo:
-      "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.",
-  };
-
-  const msg = encodeURIComponent(mensajes[color]);
-  window.location.href = `https://wa.me/5218119113114?text=${msg}`;
-};
-
-
-
-
-  if (showLead) {
-    return (
-      <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
-        <h2>Recibe tu resultado</h2>
-
-        <input
-          placeholder="Nombre"
-          value={nombre}
-          onChange={e => setNombre(e.target.value)}
-          style={{ width: "100%", padding: 12, marginBottom: 10 }}
-        />
-
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          style={{ width: "100%", padding: 12, marginBottom: 10 }}
-        />
-if (!nombre || !email) {
-  alert("Completa nombre y email");
-  return;
-}
-
-        <button
-    onClick={() => {
-  enviarAGoogleSheets();
-  setShowLead(false);
-  setStep(questions.length); // asegurar pantalla resultado
-}}
-
-          style={{ width: "100%", padding: 14 }}
-        >
-          Mi score
-        </button>
-      </div>
-    );
-  }
-
-  if (step === questions.length) {
-    return (
-      <div style={{ padding: 40, textAlign: "center" }}>
-        <h1>Resultado</h1>
-        <h2>{getLabel(score)}</h2>
-        <p>Puntaje: {score}/26</p>
-
-        <button onClick={irWhatsApp} style={{ padding: 16 }}>
-          Continuar por WhatsApp
-        </button>
-      </div>
-    );
-  }
-
-  const q = questions[step];
-
-  return (
-    <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
-      <h2>{q.question}</h2>
-
-      {q.options.map(o => (
-        <button
-          key={o.label}
-          onClick={() => {
-            setScore(score + o.score);
-            setStep(step + 1);
-          }}
-          style={{
-            display: "block",
-            width: "100%",
-            margin: "10px 0",
-            padding: 14,
-          }}
-        >
-          {o.label}
-        </button>
-      ))}
-
-      <p>Progreso {step + 1}/8</p>
-    </div>
-  );
-}
+  const irWhatsApp = () => {
+    const mensajes = {
+      ve
