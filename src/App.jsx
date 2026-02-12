@@ -100,15 +100,17 @@ useEffect(() => {
     setShowLead(true);
   }
 }, [step]);
-
+  const [sending, setSending] = useState(false);
+  setSending(true);
+  enviarAGoogleSheets();
 
   const enviarAGoogleSheets = () => {
-    const data = new URLSearchParams({
-      "entry.NOMBRE": nombre,
-      "entry.EMAIL": email,
-      "entry.SCORE": score,
-      "entry.COLOR": color,
-    });
+const data = new URLSearchParams({
+  "entry.123456789": nombre,
+  "entry.987654321": email,
+  "entry.555555555": score,
+  "entry.444444444": color,
+});
 
     fetch("PEGAR_AQUI_URL_FORM", {
       method: "POST",
@@ -117,20 +119,20 @@ useEffect(() => {
     });
   };
 
-  const irWhatsApp = () => {
-    const mensajes = {
-      verde:
-        "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.",
-      amarillo:
-        "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.",
-      rojo:
-        "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.",
-    };
-
-    const msg = encodeURIComponent(mensajes[color]);
-    window.location.href = `https://wa.me/5218119113114?text=${msg}`;
-`;
+const irWhatsApp = () => {
+  const mensajes = {
+    verde:
+      "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.",
+    amarillo:
+      "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.",
+    rojo:
+      "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.",
   };
+
+  const msg = encodeURIComponent(mensajes[color]);
+  window.location.href = `https://wa.me/5218119113114?text=${msg}`;
+};
+
 
 
 
@@ -152,12 +154,18 @@ useEffect(() => {
           onChange={e => setEmail(e.target.value)}
           style={{ width: "100%", padding: 12, marginBottom: 10 }}
         />
+if (!nombre || !email) {
+  alert("Completa nombre y email");
+  return;
+}
 
         <button
-          onClick={() => {
-            enviarAGoogleSheets();
-            setShowLead(false);
-          }}
+    onClick={() => {
+  enviarAGoogleSheets();
+  setShowLead(false);
+  setStep(questions.length); // asegurar pantalla resultado
+}}
+
           style={{ width: "100%", padding: 14 }}
         >
           MI Resultado
