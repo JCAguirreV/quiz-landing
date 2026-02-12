@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const questions = [
   {
@@ -95,24 +95,27 @@ export default function App() {
 
   const color = getColor(score);
 
-  const enviarAGoogleSheets = () => {
-  const data = new URLSearchParams({
-    "entry.704480388": nombre,
-    "entry.1731384513": email,
-    "entry.1032380844": score.toString(),
-    "entry.2114003621": color
-  });
+useEffect(() => {
+  if (step === questions.length) {
+    setShowLead(true);
+  }
+}, [step]);
 
-  fetch(
-    "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse",
-    {
+
+  const enviarAGoogleSheets = () => {
+    const data = new URLSearchParams({
+      "entry.NOMBRE": nombre,
+      "entry.EMAIL": email,
+      "entry.SCORE": score,
+      "entry.COLOR": color,
+    });
+
+    fetch("PEGAR_AQUI_URL_FORM", {
       method: "POST",
       mode: "no-cors",
       body: data,
-    }
-  );
-};
-
+    });
+  };
 
   const irWhatsApp = () => {
     const mensajes = {
@@ -125,12 +128,13 @@ export default function App() {
     };
 
     const msg = encodeURIComponent(mensajes[color]);
-    window.location.href = `https://wa.me/TUNUMERO?text=${msg}`;
+    window.location.href = `https://wa.me/5218119113114?text=${msg}`;
+`;
   };
 
-  if (step === questions.length && !showLead) {
-    setShowLead(true);
-  }
+if (step === questions.length && !showLead) {
+  setShowLead(true);
+}
 
   if (showLead) {
     return (
