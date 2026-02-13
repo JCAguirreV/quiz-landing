@@ -94,12 +94,7 @@ export default function App() {
 
   const color = getColor(score);
 
-  useEffect(() => {
-    if (step === questions.length && showLead === false) {
-      setShowLead(false);
-    }
-  }, [step]);
-
+ 
 const enviarAGoogleSheets = () => {
   const data = new URLSearchParams({
     "entry.704480388": nombre,
@@ -186,13 +181,19 @@ const enviarAGoogleSheets = () => {
         <button
           key={o.label}
           onClick={() => {
+            const newStep = step + 1;
             setScore(score + o.score);
-            setStep(step + 1);
-          }}
-        >
-          {o.label}
-        </button>
-      ))}
+
+            if (newStep === questions.length) {
+               setShowLead(true);
+            }
+
+      setStep(newStep);
+    }}
+  >
+    {o.label}
+  </button>
+))}
 
       <p>Progreso {step + 1}/8</p>
     </div>
