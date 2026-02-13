@@ -1,35 +1,46 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-module.exports = {
-  // ...
-  corePlugins: {
-    container: false
+// --- ESTILOS (Aquí integré tu código .container y más) ---
+const styles = {
+  container: {
+    maxWidth: "640px",
+    width: "100%",
+    margin: "0 auto",
+    padding: "16px",
+    fontFamily: "sans-serif",
+    textAlign: "center"
   },
-  plugins: [
-    function ({ addComponents }) {
-      addComponents({
-        '.container': {
-          maxWidth: '100%',
-          '@screen sm': {
-            maxWidth: '600px',
-          },
-          '@screen md': {
-            maxWidth: '700px',
-          },
-          '@screen lg': {
-            maxWidth: '800px',
-          },
-          '@screen xl': {
-            maxWidth: '900px',
-          },
-        }
-      })
-    }
-  ]
-}},
+  card: {
+    backgroundColor: "#f9f9f9",
+    padding: "30px",
+    borderRadius: "12px",
+    boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+  },
+  button: {
+    display: "block",
+    width: "100%",
+    padding: "12px",
+    margin: "10px 0",
+    backgroundColor: "#0070f3",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontSize: "16px"
+  },
+  input: {
+    width: "100%",
+    padding: "12px",
+    margin: "8px 0",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+    boxSizing: "border-box"
+  }
+};
 
 const questions = [
-{ question: "¿Cuál describe mejor tu situación actual?",
+  { 
+    question: "¿Cuál describe mejor tu situación actual?",
     options: [
       { label: "Trabajo muchas horas y poco tiempo familia", score: 3 },
       { label: "Necesito ingresos sin más estrés", score: 3 },
@@ -118,129 +129,132 @@ export default function App() {
   const [showLead, setShowLead] = useState(false);
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
-  const [sending, setSending] = useState(false);
 
   const color = getColor(score);
 
- 
-const enviarAGoogleSheets = () => {
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse";
-  form.target = "hidden_iframe";
+  const enviarAGoogleSheets = () => {
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse";
+    form.target = "hidden_iframe";
 
-  const fields = {
-    "entry.704480388": nombre,
-    "entry.1731384513": email,
-    "entry.1032380844": score.toString(),
-    "entry.2114003621": color,
+    const fields = {
+      "entry.704480388": nombre,
+      "entry.1731384513": email,
+      "entry.1032380844": score.toString(),
+      "entry.2114003621": color,
+    };
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
   };
 
-  Object.entries(fields).forEach(([name, value]) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = value;
-    form.appendChild(input);
-  });
-
-  document.body.appendChild(form);
-  form.submit();
-  document.body.removeChild(form);
-};
-
   const irWhatsApp = () => { 
-  const mensajes = { 
-    verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.", 
-    amarillo: "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.", 
-    rojo: "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.", 
-  }; 
-
+    const mensajes = { 
+      verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.", 
+      amarillo: "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.", 
+      rojo: "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.", 
+    }; 
     const msg = encodeURIComponent(mensajes[color]);
     window.location.href = `https://wa.me/5218119113114?text=${msg}`;
   };
 
+  // Pantalla de Formulario (Lead)
   if (showLead) {
-  return (
-    <div>
-      <iframe name="hidden_iframe" style={{ display: "none" }} />
-        <h2>Recibe tu resultado</h2>
-
-        <input
-          placeholder="Nombre"
-          value={nombre}
-          onChange={e => setNombre(e.target.value)}
-        />
-
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-
-<button
-  onClick={async() => {
-    if (!nombre || !email) {
-      alert("Completa nombre y email");
-      return;
-    }
-    
-    setSending(true);
-    enviarAGoogleSheets();
-     // dar tiempo al POST
-    setTimeout(() => {
-      setShowLead(false);
-      setStep(questions.length);
-    }, 800);
-  }}
->
-  Ver resultado
-</button>
+    return (
+      <div style={styles.container}>
+        <div style={styles.card}>
+          <iframe name="hidden_iframe" style={{ display: "none" }} />
+          <h2>¡Casi listo!</h2>
+          <p>Ingresa tus datos para ver tu perfil de emprendimiento.</p>
+          <input
+            style={styles.input}
+            placeholder="Nombre"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+          />
+          <input
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <button
+            style={styles.button}
+            onClick={() => {
+              if (!nombre || !email) {
+                alert("Completa nombre y email");
+                return;
+              }
+              enviarAGoogleSheets();
+              setTimeout(() => {
+                setShowLead(false);
+                setStep(questions.length);
+              }, 800);
+            }}
+          >
+            Ver mi resultado
+          </button>
+        </div>
       </div>
     );
   }
 
+  // Pantalla de Resultados
   if (step === questions.length) {
-  return (
-    <div>
-      <iframe name="hidden_iframe" style={{ display: "none" }} />
-        <h1>Resultado</h1>
-        <h2>{getLabel(score)}</h2>
-        <p>Puntaje: {score}/26</p>
-        <button onClick={irWhatsApp}>Continuar por WhatsApp</button>
+    return (
+      <div style={styles.container}>
+        <div style={styles.card}>
+          <h1>Tu Perfil es:</h1>
+          <h2 style={{ fontSize: "2rem" }}>{getLabel(score)}</h2>
+          <p>Puntaje obtenido: <strong>{score}/26</strong></p>
+          <hr />
+          <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
+          <button style={{ ...styles.button, backgroundColor: "#25D366" }} onClick={irWhatsApp}>
+            Contactar por WhatsApp
+          </button>
+        </div>
       </div>
     );
   }
 
+  // Pantalla de Preguntas
   const q = questions[step];
-
   return (
-    <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
-      <h2>{q.question}</h2>
-
-      {q.options.map(o => (
-        <button
-          key={o.label}
-          onClick={() => {
-            const newStep = step + 1;
-            setScore(score + o.score);
-
-            if (newStep === questions.length) {
-               setShowLead(true);
-            }
-
-      setStep(newStep);
-    }}
-  >
-    {o.label}
-  </button>
-))}
-
-      <p>Progreso {step + 1}/8</p>
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <p style={{ color: "#666" }}>Pregunta {step + 1} de {questions.length}</p>
+        <h2 style={{ marginBottom: "20px" }}>{q.question}</h2>
+        {q.options.map(o => (
+          <button
+            key={o.label}
+            style={styles.button}
+            onClick={() => {
+              const newStep = step + 1;
+              setScore(score + o.score);
+              if (newStep === questions.length) {
+                setShowLead(true);
+              } else {
+                setStep(newStep);
+              }
+            }}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
-
 
 
 
