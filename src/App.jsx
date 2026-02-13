@@ -26,7 +26,7 @@ module.exports = {
       })
     }
   ]
-}
+}},
 
 const questions = [
 { question: "¿Cuál describe mejor tu situación actual?",
