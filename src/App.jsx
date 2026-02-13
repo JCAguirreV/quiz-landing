@@ -107,8 +107,9 @@ export default function App() {
       "entry.1032380844": score.toString(), 
       "entry.2114003621": color,
     });
+         
 
-    fetch( "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse", { 
+    fetch( "https://docs.google.com/forms/d/1uL6fQo7t7ke1yr7ToBnK0dEWtTKSPxs2D_bYTEUX9m0/viewform", { 
       method: "POST", 
       mode: "no-cors", 
       body: data, 
