@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-<div className="max-w-xl w-full mx-auto px-4">
-
 const questions = [
 { question: "¿Cuál describe mejor tu situación actual?",
     options: [
