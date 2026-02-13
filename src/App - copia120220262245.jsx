@@ -108,13 +108,11 @@ const enviarAGoogleSheets = () => {
     {
       method: "POST",
       mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: data.toString(),
+      body: data,
     }
   );
 };
+
 
   const irWhatsApp = () => { 
   const mensajes = { 
@@ -145,19 +143,15 @@ const enviarAGoogleSheets = () => {
         />
 
 <button
-  onClick={async() => {
+  onClick={() => {
     if (!nombre || !email) {
       alert("Completa nombre y email");
       return;
     }
-    
-    setSending(true);
+
     enviarAGoogleSheets();
-     // dar tiempo al POST
-    setTimeout(() => {
-      setShowLead(false);
-      setStep(questions.length);
-    }, 600);
+    setShowLead(false);
+    setStep(questions.length);
   }}
 >
   Ver resultado
