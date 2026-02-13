@@ -96,24 +96,29 @@ export default function App() {
 
  
 const enviarAGoogleSheets = () => {
-  const data = new URLSearchParams({
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse";
+  form.target = "hidden_iframe";
+
+  const fields = {
     "entry.704480388": nombre,
     "entry.1731384513": email,
     "entry.1032380844": score.toString(),
     "entry.2114003621": color,
+  };
+
+  Object.entries(fields).forEach(([name, value]) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
   });
 
-  fetch(
-    "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse",
-    {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: data.toString(),
-    }
-  );
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
 };
 
   const irWhatsApp = () => { 
@@ -128,8 +133,9 @@ const enviarAGoogleSheets = () => {
   };
 
   if (showLead) {
-    return (
-      <div style={{ padding: 40, maxWidth: 600, margin: "auto" }}>
+  return (
+    <div>
+      <iframe name="hidden_iframe" style={{ display: "none" }} />
         <h2>Recibe tu resultado</h2>
 
         <input
@@ -167,8 +173,9 @@ const enviarAGoogleSheets = () => {
   }
 
   if (step === questions.length) {
-    return (
-      <div style={{ padding: 40, textAlign: "center" }}>
+  return (
+    <div>
+      <iframe name="hidden_iframe" style={{ display: "none" }} />
         <h1>Resultado</h1>
         <h2>{getLabel(score)}</h2>
         <p>Puntaje: {score}/26</p>
