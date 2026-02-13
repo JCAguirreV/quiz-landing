@@ -95,8 +95,8 @@ export default function App() {
   const color = getColor(score);
 
   useEffect(() => {
-    if (step === questions.length) {
-      setShowLead(true);
+    if (step === questions.length && showLead === false) {
+      setShowLead(false);
     }
   }, [step]);
 
@@ -147,21 +147,20 @@ const enviarAGoogleSheets = () => {
           onChange={e => setEmail(e.target.value)}
         />
 
-        <button
-          disabled={sending}
-          onClick={() => {
-            if (!nombre || !email) {
-              alert("Completa nombre y email");
-              return;
-            }
-            setSending(true);
-            enviarAGoogleSheets();
-            setShowLead(false);
-            setStep(questions.length);
-          }}
-        >
-          Ver resultado
-        </button>
+<button
+  onClick={() => {
+    if (!nombre || !email) {
+      alert("Completa nombre y email");
+      return;
+    }
+
+    enviarAGoogleSheets();
+    setShowLead(false);
+    setStep(questions.length);
+  }}
+>
+  Ver resultado
+</button>
       </div>
     );
   }
