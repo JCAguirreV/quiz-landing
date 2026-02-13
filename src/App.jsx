@@ -157,7 +157,7 @@ const enviarAGoogleSheets = () => {
     setTimeout(() => {
       setShowLead(false);
       setStep(questions.length);
-    }, 600);
+    }, 800);
   }}
 >
   Ver resultado
