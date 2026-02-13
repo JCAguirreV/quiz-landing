@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-{<div className="max-w-xl w-full mx-auto px-4">}
+.container {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+}
 
 const questions = [
 { question: "¿Cuál describe mejor tu situación actual?",
