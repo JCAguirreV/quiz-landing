@@ -1,10 +1,31 @@
 import { useState, useEffect } from "react";
 
-.container {
-  max-width: 640px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px;
+module.exports = {
+  // ...
+  corePlugins: {
+    container: false
+  },
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.container': {
+          maxWidth: '100%',
+          '@screen sm': {
+            maxWidth: '600px',
+          },
+          '@screen md': {
+            maxWidth: '700px',
+          },
+          '@screen lg': {
+            maxWidth: '800px',
+          },
+          '@screen xl': {
+            maxWidth: '900px',
+          },
+        }
+      })
+    }
+  ]
 }
 
 const questions = [
