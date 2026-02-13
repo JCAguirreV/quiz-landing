@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 const questions = [
-  {
-    question: "¿Cuál describe mejor tu situación actual?",
+{ question: "¿Cuál describe mejor tu situación actual?",
     options: [
       { label: "Trabajo muchas horas y poco tiempo familia", score: 3 },
       { label: "Necesito ingresos sin más estrés", score: 3 },
@@ -109,19 +108,20 @@ export default function App() {
       "entry.2114003621": color,
     });
 
-    fetch("PEGAR_AQUI_URL_FORM", {
-      method: "POST",
-      mode: "no-cors",
-      body: data,
-    });
-  };
+    fetch( "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse", { 
+      method: "POST", 
+      mode: "no-cors", 
+      body: data, 
+    } ); 
+    }; 
 
-  const irWhatsApp = () => {
-    const mensajes = {
-      verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE.",
-      amarillo: "Hola, terminé el diagnóstico y salí PERFIL AMARILLO.",
-      rojo: "Hola, terminé el diagnóstico y salí PERFIL ROJO.",
-    };
+
+  const irWhatsApp = () => { 
+  const mensajes = { 
+    verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.", 
+    amarillo: "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.", 
+    rojo: "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.", 
+  }; 
 
     const msg = encodeURIComponent(mensajes[color]);
     window.location.href = `https://wa.me/5218119113114?text=${msg}`;
