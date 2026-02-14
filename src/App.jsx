@@ -132,31 +132,28 @@ export default function App() {
 
   const color = getColor(score);
 
-  const enviarAGoogleSheets = () => {
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse";
-    form.target = "hidden_iframe";
+const enviarAGoogleSheets = async () => {
+  const data = new URLSearchParams({
+    "entry.704480388": nombre,
+    "entry.1731384513": email,
+    "entry.1032380844": score.toString(),
+    "entry.2114003621": color,
+  });
 
-    const fields = {
-      "entry.704480388": nombre,
-      "entry.1731384513": email,
-      "entry.1032380844": score.toString(),
-      "entry.2114003621": color,
-    };
-
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-  };
+  try {
+    await fetch(
+      "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse",
+      {
+        method: "POST",
+        mode: "no-cors",
+        body: data,
+      }
+    );
+    console.log("Enviado a Sheets");
+  } catch (e) {
+    console.log("Error envío", e);
+  }
+};
 
   const irWhatsApp = () => { 
     const mensajes = { 
@@ -190,17 +187,19 @@ export default function App() {
           />
           <button
             style={styles.button}
-            onClick={() => {
-              if (!nombre || !email) {
-                alert("Completa nombre y email");
-                return;
-              }
-              enviarAGoogleSheets();
-              setTimeout(() => {
-                setShowLead(false);
-                setStep(questions.length);
-              }, 800);
-            }}
+             onClick={async () => {
+             if (!nombre || !email) {
+               alert("Completa nombre y email");
+             return;
+             }
+
+             await enviarAGoogleSheets();
+
+             setTimeout(() => {
+             setShowLead(false);
+             setStep(questions.length);
+             }, 600);
+             }}
           >
             Ver mi resultado
           </button>
