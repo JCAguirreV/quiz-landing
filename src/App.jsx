@@ -132,28 +132,20 @@ export default function App() {
 
   const color = getColor(score);
 
-const enviarAGoogleSheets = async () => {
-  const data = new URLSearchParams({
+const enviarAGoogleSheets = () => {
+  const params = new URLSearchParams({
     "entry.704480388": nombre,
     "entry.1731384513": email,
     "entry.1032380844": score.toString(),
     "entry.2114003621": color,
   });
 
-  try {
-    await fetch(
-      "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse",
-      {
-        method: "POST",
-        mode: "no-cors",
-        body: data,
-      }
-    );
-    console.log("Enviado a Sheets");
-  } catch (e) {
-    console.log("Error envío", e);
-  }
+  const url = "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse?" + params.toString();
+
+  const img = new Image();
+  img.src = url;
 };
+
 
   const irWhatsApp = () => { 
     const mensajes = { 
