@@ -132,20 +132,26 @@ export default function App() {
 
   const color = getColor(score);
 
-const enviarAGoogleSheets = () => {
-  const params = new URLSearchParams({
-    "entry.704480388": nombre,
-    "entry.1731384513": email,
-    "entry.1032380844": score.toString(),
-    "entry.2114003621": color,
-  });
+const enviarAGoogleSheets = async () => {
+  const payload = {
+    nombre,
+    email,
+    score,
+    color
+  };
 
-  const url = "https://docs.google.com/forms/d/e/1FAIpQLSdtLjh1LIDKI-8Y-04J8L2kuVXzSy2yJVATFOPiZAYOPuT8Vg/formResponse?" + params.toString();
-
-  const img = new Image();
-  img.src = url;
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycby7r4IZtOHHnxqAc5enSrHtMtkMmOIZnM2Ghvyak7OXSHU99XL3Pyp_UWZPsjn5V063/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.error("Error enviando a Sheets:", err);
+  }
 };
-
 
   const irWhatsApp = () => { 
     const mensajes = { 
