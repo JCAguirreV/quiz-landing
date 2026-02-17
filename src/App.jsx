@@ -155,7 +155,7 @@ const enviarAGoogleSheets = async () => {
 };
   const irWhatsApp = () => { 
     const mensajes = { 
-      verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero iniciar cuanto antes.", 
+      verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero empezar cuanto antes, ¿me orientas?.", 
       amarillo: "Hola, terminé el diagnóstico y salí PERFIL AMARILLO. Quiero ver cómo funciona.", 
       rojo: "Hola, terminé el diagnóstico y salí PERFIL ROJO. Quiero más información primero.", 
     }; 
@@ -170,7 +170,7 @@ const enviarAGoogleSheets = async () => {
         <div style={styles.card}>
           <iframe name="hidden_iframe" style={{ display: "none" }} />
           <h2>¡Casi listo!</h2>
-          <p>Ingresa tus datos para ver tu perfil de emprendimiento.</p>
+          <p>Ya calculamos tu resultado.Ingresa tus datos para verlo ahora</p>
           <input
             style={styles.input}
             placeholder="Nombre"
@@ -199,7 +199,7 @@ const enviarAGoogleSheets = async () => {
              }, 600);
              }}
           >
-            Ver mi resultado
+            Ver mi resultado ahora
           </button>
         </div>
       </div>
@@ -229,6 +229,7 @@ const enviarAGoogleSheets = async () => {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
+        <p>Progreso: {step + 1} / {questions.length}</p>
         <p style={{ color: "#666" }}>Pregunta {step + 1} de {questions.length}</p>
         <h2 style={{ marginBottom: "20px" }}>{q.question}</h2>
         {q.options.map(o => (
