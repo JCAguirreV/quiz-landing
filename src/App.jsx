@@ -230,7 +230,6 @@ const enviarAGoogleSheets = async () => {
     <div style={styles.container}>
       <div style={styles.card}>
         <p>Progreso: {step + 1} / {questions.length}</p>
-        <p style={{ color: "#666" }}>Pregunta {step + 1} de {questions.length}</p>
         <h2 style={{ marginBottom: "20px" }}>{q.question}</h2>
         {q.options.map(o => (
           <button
