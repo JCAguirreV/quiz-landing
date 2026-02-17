@@ -169,8 +169,19 @@ const enviarAGoogleSheets = async () => {
       <div style={styles.container}>
         <div style={styles.card}>
           <iframe name="hidden_iframe" style={{ display: "none" }} />
-          <h2>¡Casi listo!</h2>
-          <p>Ya calculamos tu resultado.Ingresa tus datos para verlo ahora</p>
+<h2>¡Casi listo!</h2>
+
+<p style={{ fontWeight: "bold" }}>
+Tu diagnóstico está calculado.
+</p>
+
+<p>
+Deja tus datos para ver tu perfil y recibir la guía recomendada según tu resultado.
+</p>
+
+<p style={{ fontSize: "14px", opacity: 0.7 }}>
+No spam. No ventas agresivas. Solo la información de tu perfil.
+</p>
           <input
             style={styles.input}
             placeholder="Nombre"
@@ -199,7 +210,7 @@ const enviarAGoogleSheets = async () => {
              }, 600);
              }}
           >
-            Ver mi resultado ahora
+            Ver mi perfil ahora
           </button>
         </div>
       </div>
