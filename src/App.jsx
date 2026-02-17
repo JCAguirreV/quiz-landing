@@ -224,13 +224,17 @@ const enviarAGoogleSheets = async () => {
     );
   }
 
-  // Pantalla de Preguntas
-  const q = questions[step];
-  return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <p>Progreso: {step + 1} / {questions.length}</p>
-        <h2 style={{ marginBottom: "20px" }}>{q.question}</h2>
+// Pantalla de Preguntas
+const q = questions[step];
+return (
+  <div style={styles.container}>
+    <div style={styles.card}>
+
+      <p style={{ fontWeight: "bold", marginBottom: "8px" }}>
+        Diagnóstico gratis — resultado en menos de 2 minutos
+      </p>
+      <p style={{ color: "#666" }}>Progreso {step + 1} de {questions.length}</p>
+      <h2 style={{ marginBottom: "20px" }}>{q.question}</h2>
         {q.options.map(o => (
           <button
             key={o.label}
