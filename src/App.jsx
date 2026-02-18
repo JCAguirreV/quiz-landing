@@ -128,18 +128,16 @@ export default function App() {
   const [score, setScore] = useState(0);
   const [showLead, setShowLead] = useState(false);
   const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-
+  const [telefono, setTelefono] = useState("");
   const color = getColor(score);
 
 const enviarAGoogleSheets = async () => {
   const payload = {
     nombre,
-    email,
+    telefono,
     score,
     color
   };
-
   try {
     await fetch("https://script.google.com/macros/s/AKfycby7r4IZtOHHnxqAc5enSrHtMtkMmOIZnM2Ghvyak7OXSHU99XL3Pyp_UWZPsjn5V063/exec", {
       method: "POST",
@@ -169,19 +167,20 @@ const enviarAGoogleSheets = async () => {
       <div style={styles.container}>
         <div style={styles.card}>
           <iframe name="hidden_iframe" style={{ display: "none" }} />
-<h2>¡Casi listo!</h2>
 
-<p style={{ fontWeight: "bold" }}>
-Tu diagnóstico está calculado.
-</p>
+            <h2>Tu resultado ya está listo</h2>
 
-<p>
-Deja tus datos para ver tu perfil y recibir la guía recomendada según tu resultado.
-</p>
+            <p style={{fontWeight:"bold"}}>
+               Ya calculamos tu perfil de emprendimiento.
+            </p>
 
-<p style={{ fontSize: "14px", opacity: 0.7 }}>
-No spam. No ventas agresivas. Solo la información de tu perfil.
-</p>
+            <p>
+               Deja tu nombre y WhatsApp para verlo ahora y recibir la guía recomendada.
+            </p>
+
+            <p style={{fontSize:"14px", opacity:0.7}}>
+               No spam. Solo tu resultado y orientación.
+            </p>
           <input
             style={styles.input}
             placeholder="Nombre"
@@ -189,16 +188,16 @@ No spam. No ventas agresivas. Solo la información de tu perfil.
             onChange={e => setNombre(e.target.value)}
           />
           <input
-            style={styles.input}
-            placeholder="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
+             style={styles.input}
+             placeholder="WhatsApp"
+             value={telefono}
+             onChange={e => setTelefono(e.target.value)}
+           />          
           <button
             style={styles.button}
              onClick={async () => {
-             if (!nombre || !email) {
-               alert("Completa nombre y email");
+             if (!nombre || !telefono) {
+               alert("Completa nombre y teléfono");
              return;
              }
 
@@ -210,7 +209,7 @@ No spam. No ventas agresivas. Solo la información de tu perfil.
              }, 600);
              }}
           >
-            Ver mi perfil ahora
+            Ver mi resultado ahora
           </button>
         </div>
       </div>
