@@ -141,7 +141,6 @@ const enviarAGoogleSheets = async () => {
   try {
     await fetch("https://script.google.com/macros/s/AKfycby7r4IZtOHHnxqAc5enSrHtMtkMmOIZnM2Ghvyak7OXSHU99XL3Pyp_UWZPsjn5V063/exec", {
       method: "POST",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json"
       },
