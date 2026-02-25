@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 // --- ESTILOS (Aquí integré tu código .container y más) ---
 const styles = {
   container: {
@@ -37,6 +38,8 @@ const styles = {
     boxSizing: "border-box"
   }
 };
+
+
 
 const questions = [
   { 
@@ -124,11 +127,14 @@ function getLabel(score) {
 }
 
 export default function App() {
+  const [started, setStarted] = useState(false)
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
   const [showLead, setShowLead] = useState(false);
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
+  const LEAD_STEP = 3;
+  const [enviando, setEnviando] = useState(false);
   const color = getColor(score);
 
 const enviarAGoogleSheets = async () => {
@@ -161,6 +167,31 @@ const enviarAGoogleSheets = async () => {
     window.location.href = `https://wa.me/5218119113114?text=${msg}`;
   };
 
+if (!started) {
+  return (
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2>Descubre si este modelo es adecuado para ti</h2>
+
+        <p>
+          Este diagnóstico toma menos de 2 minutos y te mostrará si tu perfil es apto para generar ingresos con joyería.
+        </p>
+
+        <p style={{fontWeight:"bold"}}>
+          No todos califican.
+        </p>
+
+        <button
+          style={styles.button}
+          onClick={() => setStarted(true)}
+        >
+          Comenzar diagnóstico
+        </button>
+      </div>
+    </div>
+  );
+}
+
   // Pantalla de Formulario (Lead)
   if (showLead) {
     return (
@@ -181,31 +212,46 @@ const enviarAGoogleSheets = async () => {
             <p style={{fontSize:"14px", opacity:0.7}}>
                No spam. Solo tu resultado y orientación.
             </p>
+     
           <input
-            style={styles.input}
-            placeholder="Nombre"
-            value={nombre}
-            onChange={e => setNombre(e.target.value)}
-          />
+           id="nombre"
+           name="nombre"
+           type="text"
+           autoComplete="given-name"
+           style={styles.input}
+           placeholder="Nombre"
+           value={nombre}
+           onChange={e => setNombre(e.target.value)}
+           />
           <input
-             style={styles.input}
-             placeholder="WhatsApp"
-             value={telefono}
-             onChange={e => setTelefono(e.target.value)}
-           />          
+           id="telefono"
+           name="telefono"
+           type="tel"
+           autoComplete="tel"
+           style={styles.input}
+           placeholder="WhatsApp"
+           value={telefono}
+           onChange={e => setTelefono(e.target.value)}
+/>
+   
           <button
             style={styles.button}
-             onClick={async () => {
-             if (!nombre || !telefono) {
-               alert("Completa nombre y teléfono");
-             return;
-             }
+            onClick={async () => {
+
+              if (enviando) return;
+
+               if (!nombre || !telefono) {
+                 alert("Completa nombre y teléfono");
+                 return;
+               }
+
+               setEnviando(true);
 
              await enviarAGoogleSheets();
 
              setTimeout(() => {
              setShowLead(false);
-             setStep(questions.length);
+             setStep(LEAD_STEP);
              }, 600);
              }}
           >
@@ -252,7 +298,7 @@ return (
             onClick={() => {
               const newStep = step + 1;
               setScore(score + o.score);
-              if (newStep === questions.length) {
+              if (newStep === LEAD_STEP && !nombre && !telefono) {
                 setShowLead(true);
               } else {
                 setStep(newStep);
