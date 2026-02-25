@@ -199,14 +199,14 @@ if (!started) {
         <div style={styles.card}>
           <iframe name="hidden_iframe" style={{ display: "none" }} />
 
-            <h2>Tu resultado ya está listo</h2>
+            <h2>Para mostrarte tu resultado, </h2>
 
             <p style={{fontWeight:"bold"}}>
-               Ya calculamos tu perfil de emprendimiento.
+               ¿A donde te lo enviamos?.
             </p>
 
             <p>
-               Deja tu nombre y WhatsApp para verlo ahora y recibir la guía recomendada.
+               Deja tu nombre y WhatsApp para recibir la recomendación.
             </p>
 
             <p style={{fontSize:"14px", opacity:0.7}}>
@@ -255,7 +255,7 @@ if (!started) {
              }, 600);
              }}
           >
-            Ver mi resultado ahora
+            Continuar
           </button>
         </div>
       </div>
