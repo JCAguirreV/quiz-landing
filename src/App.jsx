@@ -148,8 +148,8 @@ const enviarAGoogleSheets = async () => {
     color
   };
 
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbwThtxq9jzXcJJBq0j2SfUGBZDg5CUJth01YK4M8SBoM3mwKWVr5Wj1SJaCkhZTorZt/exec", {
+  try {                 
+    await fetch("https://script.google.com/macros/s/AKfycbxKUXoXij-g0SGZbrtGEaenBaYE1-RFdrwyRFwiJxNPpfkzLv4TyPYRljcEme5IUegD/exec", {
       method: "POST",
       headers: {
         "Content-Type": "text/plain;charset=utf-8",
