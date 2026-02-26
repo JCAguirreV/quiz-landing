@@ -266,39 +266,38 @@ if (!started) {
         <div style={styles.card}>
           <h1>Tu Perfil es:</h1>
           <h2 style={{ fontSize: "2rem" }}>{getLabel(score)}</h2>
-<p>VERSION 3.0</p>
+<p>VERSION 3.1</p>
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
 <button 
   style={{ ...styles.button, backgroundColor: "#25D366" }} 
 onClick={async () => {
-window.location.href = "https://wa.me/5218119113114";}}
-//  if (enviando) return;
+  if (enviando) return;
 
-//  try {
-//    setEnviando(true);
+  try {
+    setEnviando(true);
 
-//    console.log("Enviando a Sheets...");
+    console.log("Enviando a Sheets...");
 
-//    enviarAGoogleSheets();
+    enviarAGoogleSheets();
 
-//    console.log("Enviado correctamente");
+    console.log("Enviado correctamente");
 
-//    irWhatsApp();
+    irWhatsApp();
 
-//  } 
+  } 
 
-//catch (error) {
+catch (error) {
 
-//    console.error("Error:", error);
+    console.error("Error:", error);
 
-//    alert("Error al enviar. Intenta nuevamente.");
+    alert("Error al enviar. Intenta nuevamente.");
 
-//    setEnviando(false);
+    setEnviando(false);
 
-//  }
-//}}
+  }
+}}
 >
   Recibir asesoría
 </button>
