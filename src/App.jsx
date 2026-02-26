@@ -269,7 +269,7 @@ if (!started) {
         <div style={styles.card}>
           <h1>Tu Perfil es:</h1>
           <h2 style={{ fontSize: "2rem" }}>{getLabel(score)}</h2>
-<p>VERSION 2.1</p>
+<p>VERSION 3.0</p>
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
