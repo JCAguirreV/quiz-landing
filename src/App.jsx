@@ -127,6 +127,7 @@ function getLabel(score) {
 }
 
 export default function App() {
+  const [pendingStep, setPendingStep] = useState(null);
   const [started, setStarted] = useState(false)
   const [step, setStep] = useState(0);
   const [score, setScore] = useState(0);
