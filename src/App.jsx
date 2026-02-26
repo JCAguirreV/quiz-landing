@@ -145,8 +145,8 @@ const enviarAGoogleSheets = async () => {
     score,
     color
   };
-  try {
-      await fetch("https://script.google.com/macros/s/AKfycbxiwM4cXHwJgk63tZf8PHiiT7hjQPfMcMYelMY3b57WkGCwXuzj0Au17WuY6Wm33rB6/exec", {
+  try {             
+      await fetch("https://script.google.com/macros/s/AKfycbwThtxq9jzXcJJBq0j2SfUGBZDg5CUJth01YK4M8SBoM3mwKWVr5Wj1SJaCkhZTorZt/exec", {
       method: "POST",
       mode: "no-cors",
       headers: {
