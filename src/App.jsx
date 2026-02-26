@@ -281,6 +281,7 @@ if (!started) {
 <button 
   style={{ ...styles.button, backgroundColor: "#25D366" }} 
 onClick={async () => {
+alert("CLICK FUNCIONA");
   if (enviando) return;
 
   try {
