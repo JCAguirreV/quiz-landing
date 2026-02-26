@@ -272,31 +272,16 @@ if (!started) {
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
 <button 
   style={{ ...styles.button, backgroundColor: "#25D366" }} 
-onClick={async () => {
+onClick={() => {
+
   if (enviando) return;
 
-  try {
-    setEnviando(true);
+  setEnviando(true);
 
-    console.log("Enviando a Sheets...");
+  enviarAGoogleSheets();
 
-    enviarAGoogleSheets();
+  irWhatsApp();
 
-    console.log("Enviado correctamente");
-
-    irWhatsApp();
-
-  } 
-
-catch (error) {
-
-    console.error("Error:", error);
-
-    alert("Error al enviar. Intenta nuevamente.");
-
-    setEnviando(false);
-
-  }
 }}
 >
   Recibir asesoría
