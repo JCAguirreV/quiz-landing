@@ -281,32 +281,32 @@ if (!started) {
 <button 
   style={{ ...styles.button, backgroundColor: "#25D366" }} 
 onClick={async () => {
-alert("CLICK FUNCIONA");
-  if (enviando) return;
+window.location.href = "https://wa.me/5218119113114";}}
+//  if (enviando) return;
 
-  try {
-    setEnviando(true);
+//  try {
+//    setEnviando(true);
 
-    console.log("Enviando a Sheets...");
+//    console.log("Enviando a Sheets...");
 
-    enviarAGoogleSheets();
+//    enviarAGoogleSheets();
 
-    console.log("Enviado correctamente");
+//    console.log("Enviado correctamente");
 
-    irWhatsApp();
+//    irWhatsApp();
 
-  } 
+//  } 
 
-catch (error) {
+//catch (error) {
 
-    console.error("Error:", error);
+//    console.error("Error:", error);
 
-    alert("Error al enviar. Intenta nuevamente.");
+//    alert("Error al enviar. Intenta nuevamente.");
 
-    setEnviando(false);
+//    setEnviando(false);
 
-  }
-}}
+//  }
+//}}
 >
   Recibir asesoría
 </button>
