@@ -277,7 +277,7 @@ if (!started) {
 
             await enviarAGoogleSheets(); // ← AQUÍ
 
-            irWhatsApp();
+            irWhatsApp();}} >
             Recibir asesoría
           </button>
         </div>
