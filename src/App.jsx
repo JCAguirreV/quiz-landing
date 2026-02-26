@@ -147,7 +147,7 @@ const enviarAGoogleSheets = () => {
     color
   };
                 
-  const url = "https://script.google.com/macros/s/AKfycbyDN4ZAmePN6laQ7QjbO8m1ue26ozAPViZ5Not3WY4MhBcN54un8tNkCaMSNksZKu4q/exec";
+  const url = "https://script.google.com/macros/s/AKfycbxn8T14tIUdimCpgNlasgwY7fvHEcu0wZXnzo0aT5UbD2CSLdaYgJx7MZdD8LSwMUvy/exec";
 
   navigator.sendBeacon(
     url,
