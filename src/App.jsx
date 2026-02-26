@@ -252,7 +252,7 @@ if (!started) {
 
              setTimeout(() => {
              setShowLead(false);
-             setStep(prev => prev);
+             setStep(pendingStep);
              }, 600);
              }}
           >
@@ -298,8 +298,11 @@ return (
             style={styles.button}
             onClick={() => {
               const newStep = step + 1;
-               setScore(prevScore => prevScore + o.score);
+               
+              setScore(prevScore => prevScore + o.score);
+              
               if (newStep === LEAD_STEP && !nombre && !telefono) {
+                setPendingStep(newStep); // GUARDAMOS el siguiente spte
                 setShowLead(true);
               } else {
                 setStep(newStep);
