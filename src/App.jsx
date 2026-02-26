@@ -288,7 +288,7 @@ onClick={async () => {
 
     console.log("Enviando a Sheets...");
 
-    await enviarAGoogleSheets();
+    enviarAGoogleSheets();
 
     console.log("Enviado correctamente");
 
