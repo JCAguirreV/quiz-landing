@@ -251,7 +251,7 @@ if (!started) {
 
              setTimeout(() => {
              setShowLead(false);
-             setStep(LEAD_STEP);
+             setStep(prev => prev);
              }, 600);
              }}
           >
@@ -273,7 +273,7 @@ if (!started) {
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
           <button style={{ ...styles.button, backgroundColor: "#25D366" }} onClick={irWhatsApp}>
-            Contactar por WhatsApp
+            Recibir asesoría
           </button>
         </div>
       </div>
@@ -297,7 +297,7 @@ return (
             style={styles.button}
             onClick={() => {
               const newStep = step + 1;
-              setScore(score + o.score);
+               setScore(prevScore => prevScore + o.score);
               if (newStep === LEAD_STEP && !nombre && !telefono) {
                 setShowLead(true);
               } else {
