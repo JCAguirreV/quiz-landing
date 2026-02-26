@@ -149,7 +149,7 @@ const enviarAGoogleSheets = async () => {
   };
 
   try {                 
-    await fetch("https://script.google.com/macros/s/AKfycbxKUXoXij-g0SGZbrtGEaenBaYE1-RFdrwyRFwiJxNPpfkzLv4TyPYRljcEme5IUegD/exec", {
+    await fetch("https://script.google.com/macros/s/AKfycbxCFm_SKB2_D5zd1p4kEVPRpKdMlzLM0WrO2CMdM-tsSypna2TIQcYNF5CDL_6fQm-p/exec", {
       method: "POST",
       headers: {
         "Content-Type": "text/plain;charset=utf-8",
