@@ -139,26 +139,31 @@ export default function App() {
   const color = getColor(score);
 
 const enviarAGoogleSheets = async () => {
-console.log("ENVIANDO...");
+  console.log("ENVIANDOJC...");
+
   const payload = {
     nombre,
     telefono,
     score,
     color
   };
-  try {             
-      await fetch("https://script.google.com/macros/s/AKfycbwThtxq9jzXcJJBq0j2SfUGBZDg5CUJth01YK4M8SBoM3mwKWVr5Wj1SJaCkhZTorZt/exec", {
+
+  try {
+    await fetch("https://script.google.com/macros/s/AKfycbwThtxq9jzXcJJBq0j2SfUGBZDg5CUJth01YK4M8SBoM3mwKWVr5Wj1SJaCkhZTorZt/exec", {
       method: "POST",
-      mode: "no-cors",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain;charset=utf-8",
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
+
+    console.log("Datos enviados correctamente");
+
   } catch (err) {
     console.error("Error enviando a Sheets:", err);
   }
 };
+
   const irWhatsApp = () => { 
     const mensajes = { 
       verde: "Hola, terminé el diagnóstico y salí PERFIL VERDE. Quiero empezar cuanto antes, ¿me orientas?.", 
