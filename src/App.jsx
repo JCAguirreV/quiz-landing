@@ -246,10 +246,11 @@ if (!started) {
                setEnviando(true);
 
 
-             setTimeout(() => {
-             setShowLead(false);
-             setStep(pendingStep);
-             }, 600);
+               setTimeout(() => {
+               setShowLead(false);
+               setStep(pendingStep);
+               setEnviando(false); // CLAVE
+               }, 600);
              }}
           >
             Continuar
