@@ -247,7 +247,6 @@ if (!started) {
 
                setEnviando(true);
 
-             await enviarAGoogleSheets();
 
              setTimeout(() => {
              setShowLead(false);
@@ -272,7 +271,9 @@ if (!started) {
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
-          <button style={{ ...styles.button, backgroundColor: "#25D366" }} onClick={irWhatsApp}>
+          <button style={{ ...styles.button, backgroundColor: "#25D366" }} 
+           await enviarAGoogleSheets();
+           onClick={irWhatsApp}>
             Recibir asesoría
           </button>
         </div>
