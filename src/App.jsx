@@ -178,7 +178,7 @@ if (!started) {
           Este diagnóstico toma menos de 2 minutos y te mostrará si tu perfil es apto para generar ingresos con joyería.
         </p>
 
-        <p style={{fontWeight:"bold"}}>
+        <p style={{ fontWeight: "bold" }}>
           No todos califican.
         </p>
 
@@ -192,7 +192,6 @@ if (!started) {
     </div>
   );
 }
-
   // Pantalla de Formulario (Lead)
   if (showLead) {
     return (
@@ -302,7 +301,7 @@ return (
               setScore(prevScore => prevScore + o.score);
               
               if (newStep === LEAD_STEP && !nombre && !telefono) {
-                setPendingStep(newStep); // GUARDAMOS el siguiente spte
+                setPendingStep(newStep); // GUARDAMOS el siguiente step
                 setShowLead(true);
               } else {
                 setStep(newStep);
