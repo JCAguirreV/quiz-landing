@@ -272,8 +272,12 @@ if (!started) {
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
           <button style={{ ...styles.button, backgroundColor: "#25D366" }} 
-           await enviarAGoogleSheets();
-           onClick={irWhatsApp}>
+
+          onClick={async () => {
+
+            await enviarAGoogleSheets(); // ← AQUÍ
+
+            irWhatsApp();
             Recibir asesoría
           </button>
         </div>
