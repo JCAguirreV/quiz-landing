@@ -138,8 +138,7 @@ export default function App() {
   const [enviando, setEnviando] = useState(false);
   const color = getColor(score);
 
-const enviarAGoogleSheets = async () => {
-  console.log("ENVIANDOJC...");
+const enviarAGoogleSheets = () => {
 
   const payload = {
     nombre,
@@ -147,21 +146,14 @@ const enviarAGoogleSheets = async () => {
     score,
     color
   };
+               
+  const url = "https://script.google.com/macros/s/AKfycbxCFm_SKB2_D5zd1p4kEVPRpKdMlzLM0WrO2CMdM-tsSypna2TIQcYNF5CDL_6fQm-p/exec";
 
-  try {                 
-    await fetch("https://script.google.com/macros/s/AKfycbxCFm_SKB2_D5zd1p4kEVPRpKdMlzLM0WrO2CMdM-tsSypna2TIQcYNF5CDL_6fQm-p/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: JSON.stringify(payload),
-    });
+  navigator.sendBeacon(
+    url,
+    new Blob([JSON.stringify(payload)], { type: "application/json" })
+  );
 
-    console.log("Datos enviados correctamente");
-
-  } catch (err) {
-    console.error("Error enviando a Sheets:", err);
-  }
 };
 
   const irWhatsApp = () => { 
