@@ -271,15 +271,23 @@ if (!started) {
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
-          <button style={{ ...styles.button, backgroundColor: "#25D366" }} 
+          <button 
+            style={{ ...styles.button, backgroundColor: "#25D366" }} 
+            onClick={async () => {
 
-          onClick={async () => {
+            if (enviando) return;
+             setEnviando(true);
 
-            await enviarAGoogleSheets(); // ← AQUÍ
+             await enviarAGoogleSheets();
 
-            irWhatsApp();}} >
-            Recibir asesoría
-          </button>
+             setTimeout(() => {
+             irWhatsApp();
+            }, 300);
+
+  }}
+>
+  Recibir asesoría
+</button>
         </div>
       </div>
     );
