@@ -274,12 +274,9 @@ if (!started) {
           <button 
             style={{ ...styles.button, backgroundColor: "#25D366" }} 
             onClick={async () => {
-
             if (enviando) return;
              setEnviando(true);
-
              await enviarAGoogleSheets();
-
              setTimeout(() => {
              irWhatsApp();
             }, 300);
