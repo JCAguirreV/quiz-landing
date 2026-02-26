@@ -139,6 +139,7 @@ export default function App() {
   const color = getColor(score);
 
 const enviarAGoogleSheets = async () => {
+console.log("ENVIANDO...");
   const payload = {
     nombre,
     telefono,
@@ -268,18 +269,23 @@ if (!started) {
         <div style={styles.card}>
           <h1>Tu Perfil es:</h1>
           <h2 style={{ fontSize: "2rem" }}>{getLabel(score)}</h2>
+<p>VERSION 2.1</p>
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
-          <button 
-            style={{ ...styles.button, backgroundColor: "#25D366" }} 
-            onClick={async () => {
-            if (enviando) return;
-             setEnviando(true);
-             await enviarAGoogleSheets();
-             setTimeout(() => {
-             irWhatsApp();
-            }, 300);
+<button 
+  style={{ ...styles.button, backgroundColor: "#25D366" }} 
+  onClick={() => {
+
+    if (enviando) return;
+console.log("CLICK");
+    setEnviando(true);
+
+    enviarAGoogleSheets(); // ← sin await
+
+    setTimeout(() => {
+      irWhatsApp();
+    }, 300);
 
   }}
 >
