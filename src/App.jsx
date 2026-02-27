@@ -138,7 +138,7 @@ export default function App() {
   const [enviando, setEnviando] = useState(false);
   const color = getColor(score);
 
-const enviarAGoogleSheets = () => {
+const enviarAGoogleSheets = async () => {
 
   const payload = {
     nombre,
@@ -146,15 +146,20 @@ const enviarAGoogleSheets = () => {
     score,
     color
   };
-               
+
   const url = "https://script.google.com/macros/s/AKfycbzxT0rdZcmyItMdP5UzALNHi59ibdZY2lNy5ikAaGGbslam7cYTzruz1yS5WPCLY9j9/exec";
 
-  navigator.sendBeacon(
-    url,
-    new Blob([JSON.stringify(payload)], { type: "application/json" })
-  );
+  await fetch(url, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
 };
+               
 
   const irWhatsApp = () => { 
     const mensajes = { 
@@ -273,13 +278,14 @@ if (!started) {
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
 <button 
   style={{ ...styles.button, backgroundColor: "#25D366" }} 
-onClick={() => {
+
+onClick={async () => {
 
   if (enviando) return;
 
   setEnviando(true);
 
-  enviarAGoogleSheets();
+  await enviarAGoogleSheets(); // 👈 ahora espera
 
   irWhatsApp();
 
