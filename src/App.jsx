@@ -146,7 +146,7 @@ const enviarAGoogleSheets = () => {
     score,
     color
   };
-                
+ 
   const url = "https://script.google.com/macros/s/AKfycbxn8T14tIUdimCpgNlasgwY7fvHEcu0wZXnzo0aT5UbD2CSLdaYgJx7MZdD8LSwMUvy/exec";
 
   navigator.sendBeacon(
@@ -267,7 +267,7 @@ if (!started) {
         <div style={styles.card}>
           <h1>Tu Perfil es:</h1>
           <h2 style={{ fontSize: "2rem" }}>{getLabel(score)}</h2>
-<p>VERSION 3.1</p>
+<p>VERSION 3.2</p>
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
