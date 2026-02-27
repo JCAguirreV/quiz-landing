@@ -177,7 +177,7 @@ if (!started) {
         </p>
 
         <p style={{ fontWeight: "bold" }}>
-          NO TODOS CALIFICAN.
+          No todos CALIFICAN.
         </p>
 
         <button
