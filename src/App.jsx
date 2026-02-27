@@ -146,8 +146,8 @@ const enviarAGoogleSheets = () => {
     score,
     color
   };
-
-  const url = "https://script.google.com/macros/s/AKfycbwiWR3iS5VbRXKhRiYPW_akS-PpqxIoFFKcE2AaVbDmG8G_MaPIDbRhDnuFvK5m0PjA/exec";
+               
+  const url = "https://script.google.com/macros/s/AKfycbzxT0rdZcmyItMdP5UzALNHi59ibdZY2lNy5ikAaGGbslam7cYTzruz1yS5WPCLY9j9/exec";
 
   navigator.sendBeacon(
     url,
