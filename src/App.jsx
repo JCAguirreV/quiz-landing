@@ -146,8 +146,8 @@ const enviarAGoogleSheets = async () => {
     score,
     color
   };
-
-  const url = "https://script.google.com/macros/s/AKfycbzxT0rdZcmyItMdP5UzALNHi59ibdZY2lNy5ikAaGGbslam7cYTzruz1yS5WPCLY9j9/exec";
+               
+  const url = "https://script.google.com/macros/s/AKfycbzKK-kRX9rUqPHFsweeVP_k9RdWxZF9jkUzTIRMh4bCkMYtfa_8gcFOui3THBl6Qfi2/exec";
 
   await fetch(url, {
     method: "POST",
@@ -272,7 +272,7 @@ if (!started) {
         <div style={styles.card}>
           <h1>Tu Perfil es:</h1>
           <h2 style={{ fontSize: "2rem" }}>{getLabel(score)}</h2>
-<p>VERSION 3.3</p>
+<p>VERSION 1.0</p>
           <p>Puntaje obtenido: <strong>{score}/26</strong></p>
           <hr />
           <p>Haz clic abajo para recibir tu asesoría personalizada:</p>
